@@ -1,0 +1,119 @@
+@-moz-document url-prefix("https://ihighway.jp/pcsite/map/") {
+/* iHighwayのロゴを消す */
+div#cm_ihighway_logo {
+    display: none;
+}
+
+/* 「重要なお知らせ」を消す*/
+div#cm_emergency_area {
+    display: none;
+}
+
+/* NEXCOのロゴを消す */
+div.cm_nexco_logo_box {
+    display: none;
+}
+
+/* 更新時刻の表示の調整 */
+div#cm_header_update {
+    padding-left: 1em;
+    font-size: 16pt;
+    font-weight: bold;
+    color: black;
+}
+
+/* 左のメニューバーを消す */
+article#cm_menu {
+    display: none;
+}
+
+/* バナーメッセージを消す */
+div#cm_header_topic_area {
+    display: none;
+}
+
+/* バナーメッセージの分、縮める */
+article#cm_header {
+    height: 40px;
+    min-height: 40px;
+}
+
+/* 地図の上に出るエリア名のヘッダを消す */
+div#mp_map_notify_box {
+    display: none;
+}
+
+/* 左上の「関東エリア」を消す */
+div#mp_data_box_data_head {
+    display: none;
+}
+
+/* 通行止め、ランプ閉鎖 … の 「渋滞」と「事故」だけ表示 */
+div#mp_data_box_list_box_kisei > :not(.mp_map_accident_jam):not(.mp_map_accident_accident) {
+    display: none;
+}
+
+/* 渋滞のリストを上下一杯に表示する */
+div#mp_data_box_list_area {
+    height: 100% !important;
+}
+div.accident_area {
+    height: calc(100% - 50px) !important;
+}
+
+/* 渋滞のリストを上下一杯に表示する */
+div.mp_map_accident_jam:not([style="height: 30px;"]) {
+    height: calc(100% - 32px) !important;
+}
+
+/* 事故のリストを上下一杯に表示する */
+div.mp_map_accident_accident:not([style="height: 30px;"]) {
+    height: calc(100% - 32px) !important;
+}
+
+/* 渋滞の距離のサイズを小さくする */
+div.icon_text {
+    padding-top: 1px !important;
+    font-size: 16px !important;
+    width: 28px !important;
+    /* height: 32px !important; */
+    height: 20px !important;
+}
+
+/* 渋滞の "km" の位置調整 */
+/*
+span.jam_km {
+    width: 32px !important;
+}
+*/
+
+/* 渋滞の "km" を消す */
+span.jam_km {
+    display: none !important;
+}
+
+/* 渋滞のリストの高さを縮める */
+div.mp_map_accident_jam li {
+    min-height: 26px !important;
+}
+
+/* 渋滞のリストのフォントサイズと幅を縮める */
+div.mp_map_accident_jam div.text {
+    width: 190px !important;
+    font-size: 12px !important;
+}
+
+/* 右のアイコンを消す */
+div#mp_weather_div,
+div#mp_map_zoom_box,
+div#mp_map_mode_box,
+div#mp_map_layer_box,
+div#mp_map_key_box {
+    display: none
+}
+
+/* copyrightsなどのフッターを消す */
+article#cm_footer {
+    display: none;
+}
+}
