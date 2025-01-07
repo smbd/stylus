@@ -1,174 +1,181 @@
-@-moz-document domain("twitter.com") {
-/* DMのpopupを消す */
-h2 + div#layers > div:first-child {
-    display: none;
+/* ==UserStyle==
+@name         x.com
+@description  customize x.com, use with "Control Panel for Twitter" addon
+@author       smbd.jp@gmail.com
+@namespace    http://smbd.jp
+@version      1.0
+@license      MIT
+==/USerStyle== */
+
+/** 全体共通 **/
+@-moz-document url-prefix("https://x.com/") {
+	/* 左のサイドバーを左に寄せる */
+	header[role="banner"] {
+	    flex-grow: 0;
+	}
+	
+	header[role="banner"] > div {
+	    margin-left: 0px;
+	}
+	
+	/* 左のサイドバーのアイコン群を真ん中寄せにする (テキストのdivを非表示にすることにより) */
+	header[role="banner"] nav[role="navigation"] > a > div > div:nth-of-type(2):has(> span),
+	header[role="banner"] button[role="button"] > div > div:nth-of-type(2):has(> span)
+	{
+	    display: none;
+	}
+	
+	/* 左のサイドバーをアイコンだけにする */
+	header[role='banner'] > div:nth-of-type(1),
+	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	    width: 75px;
+	}
+	
+	/* 左のサイドバーの tweetボタンをアイコンにする */
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] {
+	    min-width: 0px;
+	    min-height: 0px;
+	    width: 36px;
+	    height: 36px;
+	    margin: 0 10px;
+	    padding: 0;
+	    background-repeat: no-repeat;
+	    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='fill: white;' viewBox='0 0 26 26' aria-hidden='true' class='r-jwli3a r-4qtqp9 r-yyyyoo r-1472mwg r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp'%3E%3Cg%3E%3Cpath d='M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+	}
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] span,
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] svg
+	{
+	    display: none; 
+	}
+	
+	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-last-of-type(1) {
+	    margin: 0;
+	}
 }
 
-/* TLを広げる */
-[role="banner"] {
-    flex-grow: 0;
+/** HOME 通知 検索 ハッシュタグ ポスト作成 ブックマーク リスト 個々のポスト コミュニティ **/
+@-moz-document url-prefix("https://x.com/home"),
+               url-prefix("https://x.com/notifications"),
+	       url-prefix("https://x.com/search"),
+	       url-prefix("https://x.com/hashtag/"),
+	       url-prefix("https://x.com/compose/post"),
+	       url-prefix("https://x.com/i/bookmarks"),
+	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/lists(/\\d+)?"),
+	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?"),
+	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
+	/* ヘッダの「フォロー中」を非表示 */
+	main div[data-testid="primaryColumn"] div[data-testid="ScrollSnap-SwipeableList"] {
+	    display: none;
+	}
+	
+	/* 右のサイドバーの幅 */
+	div[data-testid="sidebarColumn"],
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2),
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	    width: 250px;
+	}
+	
+	/* "「いま」を見つけよう" を少し小さくする */
+	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
+	    font-size: 20px;
+	    line-height: 20px;
+	}
+	
+	/* 右のサイドバーを右に寄せる */
+	main[role="main"] > div {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
+	    width: calc(100vw - 88px - 250px - 15px);
+	}
+	
+	/* ポストのカラム(メインカラム)の幅 */
+	div[data-testid="primaryColumn"],
+	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
+	    max-width: min(calc(100vw - 88px - 250px - 15px), 1000px);
+	}
+	
+	/* RTするときに「記事読む？」 を消す */
+	div[role="menu"] > div > div > div > a:nth-child(1) {
+	    display: none;
+	}
+	
+	/*  「Xでライブ放送する」を非表示 */
+	/*
+	div[data-testid="sidebarColumn"] div:has(> div[data-testid="placementTracking"]) {
+	    display: none;
+	}
+	*/
+	
+	/* おすすめユーザーを非表示 */
+	div:has(> aside[role="complementary"]) {
+	    display: none;
+	}
 }
 
-/* 左のサイドバーの横幅 */
-header[role='banner'] { align-items: normal !important; }
-[role='banner'] > div:first-child {
-    width: 80px;
+/** ブックマーク **/
+@-moz-document url-prefix("https://x.com/i/bookmarks") {
+	/* メインカラムを広げる */
+	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-last-of-type(1) {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
+	    max-width: min(calc(100vw - 88px - 250px - 15px), 1000px);
+	}
 }
 
-/* サイドバーをアイコンだけにする */
-header[role="banner"] nav[role="navigation"] > * > div:nth-child(1) > div:nth-child(2) {
-    display: none;
+/** コミュニティノート **/
+@-moz-document url-prefix("https://x.com/i/communitynotes"),
+               url-prefix("https://x.com/i/birdwatch") {
+	/* メインカラムを広げる */
+	div[data-testid="primaryColumn"] {
+	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
+	}
+	
+	/* 右のサイドバーの幅 */
+	div[data-testid="sidebarColumn"],
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2) {
+	    width: 200px;
+	}
 }
 
-/* shrink the tweet button */
-a[href="/compose/tweet"][role="button"],
-a[href="/compose/tweet"][role="link"] {
-  width: 32px;
-  min-width: 0;
-  height: 32px;
-  min-height: 0;
-  margin: 0px 10px;
-  padding: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='fill: white;' viewBox='0 0 26 26' aria-hidden='true' class='r-jwli3a r-4qtqp9 r-yyyyoo r-1472mwg r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp'%3E%3Cg%3E%3Cpath d='M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-}
+/** 個人のページ **/
+@-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
+	/* メインカラム */
+	div[data-testid="primaryColumn"],
+	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
+	}
+	
+	/* 右のサイドバーの幅 */
+	div[data-testid="sidebarColumn"],
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2),
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	    width: 250px;
+	}
+	
+	/* "「いま」を見つけよう" を少し小さくする */
+	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
+	    font-size: 20px;
+	    line-height: 20px;
+	}
+	
+	/* 右のサイドバーを右に寄せる */
+	main[role="main"] > div {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
+	    width: calc(100vw - 88px - 250px - 15px);
+	}
+	
+	/* Xでライブ放送するを非表示 */
+	/*
+	div[data-testid="sidebarColumn"] div:has(> div[data-testid="placementTracking"]) {
+	    display: none;
+	}
+	*/
 
-a[href="/compose/tweet"][role="link"] > div > span > div {
-  display: none;
-}
-
-/* 自分のアイコン */
-div[data-testid="SideNav_AccountSwitcher_Button"] {
-    width: 72px;
-}
-
-div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),
-div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(3) {
-    display: none;
-}
-
-/* make the main area bigger and shrink the right sidebar */
-[data-testid='primaryColumn'] {
-    max-width: initial;
-    flex-shrink: 1;
-}
-
-[data-testid='sidebarColumn'] {
-    width: 150px;
-    max-width: 100%;
-    flex-grow: 1;
-}
-
-/* ↑の設定により横幅がはみ出るのを防ぐ。↓のと連動させる */
-[role='main'] > div:first-child {
-    width: 97%;
-}
-
-/* 右のサイドバーの幅 */
-[data-testid='sidebarColumn'] > div:first-child > div:last-child {
-    width: 200px;
-}
-
-/* 右上の検索窓の横幅を小さくする */
-[data-testid='sidebarColumn'] > div:first-child > div:last-child > div:first-child > div:first-child > div:first-child > div:first-child {
-    width: 200px;
-}
-
-/* TLのtweetの横幅を広げる */
-[data-testid='primaryColumn'] > div:first-child > div:last-child {
-    max-width: 1000px;
-}
-
-/* RTするときに「記事読む？」 を消す */
-div[role="menu"] > div > div > div > a:nth-child(1) {
-    display: none;
-}
-
-/* "translate tweet" を消す */
-div[dir="auto"] + div[role="button"][aria-expanded="false"] {
-    display: none;
-}
-
-/* サイドバーの Twitter Blue を消す */
-nav[role="navigation"] > a[href="/i/verified-choose"] {
-    display: none;
-}
-
-/* バッジを消す */
-svg[data-testid="icon-verified"] {
-    display: none;
-}
-
-/* hide Follow buttun in Who to follow */
-div[data-testid='UserCell'] > div:first-child > div:nth-child(2) > div:first-child > div:nth-child(2) {
-    display: none;
-}
-
-}
-
-@-moz-document url-prefix("https://twitter.com/i"), url-prefix("https://twitter.com/search"), url-prefix("https://twitter.com/hashtag"), url-prefix("https://twitter.com/compose/tweet"), url-prefix("https://twitter.com/notifications") {
-/* TL, 検索, etc... */
-
-}
-
-@-moz-document url-prefix("https://twitter.com/home") {
-/* home */
-
-/* See new Tweets を消す */
-div[data-testid="primaryColumn"] > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {
-    display: none;
-}
-
-/* "Home" ヘッダーを消す */
-div[data-testid="primaryColumn"] > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
-    display: none;
-}
-
-
-/* "For you" "Following" の高さを縮める */
-div[data-testid="primaryColumn"] nav[role="navigation"] {
-    max-height: 30px;
-}
-
-/* 認証を受ける を消す */
-div[data-testid="sidebarColumn"] > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3){
-    display: none;
-}
-
-/* impressionを消す */
-article[data-testid="tweet"] div[role="group"] > div:nth-last-child(2)
-{
-    display: none;
-}
-}
-
-@-moz-document regexp("^https:\\/\\/twitter\\.com\\/(?!home|i|search|hashtag)[A-Za-z0-9_]+") {
-/* 個人個人のページ */
-/* 横幅を広げる */
-div[data-testid="primaryColumn"] > div:nth-child(1) > div:last-child {
-    margin: 0 auto;
-    width: 1000px;
-}
-
-div[data-testid="primaryColumn"] > div:nth-child(1) > div:last-child > div:nth-child(1) > div:nth-child(1) {
-    max-width: 900px;
-}
-
-/* impressionを消す */
-article[data-testid="tweet"] div[role="group"] > div:nth-last-child(2)
-{
-    display: none;
-}
-}
-
-@-moz-document regexp("^https:\\/\\/twitter\\.com\\/(?!home|i|search|hashtag)[A-Za-z0-9_]+\\/status\\/\\d+") {
-/* 個々のtweetのページ */
-/* 横幅を縮める */
-div[data-testid="cellInnerDiv"] {
-    width: 1000px !important;
-    margin-left: 100px;
-}
-
-article[role="article"][tabindex="-1"] > div:nth-child(1) > div:nth-child(1) > div:last-child > div:nth-last-child(2) {
-    justify-content: space-around;
-}
+	/* おすすめユーザーを非表示 */
+	div[data-testid="sidebarColumn"] div:has(> aside[role="complementary"]) {
+	    display: none;
+	}
 }
