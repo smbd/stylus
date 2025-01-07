@@ -5,6 +5,7 @@
 @namespace    http://smbd.jp
 @version      1.0
 @license      MIT
+@updateURL    https://raw.githubusercontent.com/smbd/stylus/refs/heads/main/ihighway.user.css
 ==/USerStyle== */
 
 @-moz-document url-prefix("https://ihighway.jp/pcsite/map/") {
