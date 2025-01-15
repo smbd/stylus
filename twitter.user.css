@@ -3,7 +3,7 @@
 @description  customize x.com, use with "Control Panel for Twitter" addon
 @author       smbd.jp@gmail.com
 @namespace    http://smbd.jp
-@version      1.0
+@version      1.1
 @license      MIT
 @updateURL    https://raw.githubusercontent.com/smbd/stylus/refs/heads/main/twitter.user.css
 ==/USerStyle== */
@@ -66,7 +66,7 @@
 	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?"),
 	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
 	/* ヘッダの「フォロー中」を非表示 */
-	main div[data-testid="primaryColumn"] div[data-testid="ScrollSnap-SwipeableList"] {
+	main div[data-testid="primaryColumn"] nav[role="navigation"]:not(:has(a[href^="/search"])) {
 	    display: none;
 	}
 	
