@@ -14,8 +14,18 @@
         display: none;
     }
     
-    /* ライブのヘッダ */
+    /* ライブのヘッダを非表示 */
     nav[aria-live="polite"]:has(div[data-testid="placementTracking"] > button) {
+        display: none;
+    }
+    
+    /* ポスト毎のインプレッションを非表示 (タップすると戻れなくなるので) */
+    article[data-testid="tweet"] div:has(> a[href$="/analytics"]) {
+        display: none;
+    }
+    
+    /* リポストするときの「まず記事を読んでみませんか？」を非表示 */
+    div[role="menu"] div[data-testid="mask"] + div > a[href^="https://t.co/"] {
         display: none;
     }
 }
