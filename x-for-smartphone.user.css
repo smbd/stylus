@@ -1,0 +1,21 @@
+/* ==UserStyle==
+@name           x.com for smartphone
+@namespace      http://smbd.jp
+@version        1.0.0
+@description    x.com for smartphone
+@author         smbd
+@license        MIT
+@updateURL      https://github.com/smbd/stylus/raw/refs/heads/main/x-for-smartphone.user.css
+==/UserStyle== */
+
+@-moz-document url-prefix("https://x.com/home") {
+    /* 「さんがポストしました」 */
+    button:has(> div > div[data-testid="pillLabel"]) {
+        display: none;
+    }
+    
+    /* ライブのヘッダ */
+    nav[aria-live="polite"]:has(div[data-testid="placementTracking"] > button) {
+        display: none;
+    }
+}
