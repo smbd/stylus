@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.1.0
+@version        1.2.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -26,6 +26,11 @@
     
     /* リポストするときの「まず記事を読んでみませんか？」を非表示 */
     div[role="menu"] div[data-testid="mask"] + div > a[href^="https://t.co/"] {
+        display: none;
+    }
+
+    /* RT済のポストを非表示 */
+    article:has(div > button[data-testid="unretweet"]) {
         display: none;
     }
 }
