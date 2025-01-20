@@ -76,12 +76,14 @@
 	}
 	
 	/* 右のサイドバーの幅 */
+	/*
 	div[data-testid="sidebarColumn"],
 	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2),
 	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
 	{
 	    width: 250px;
 	}
+	*/
 	
 	/* "「いま」を見つけよう" を少し小さくする */
 	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
@@ -91,15 +93,15 @@
 	
 	/* 右のサイドバーを右に寄せる */
 	main[role="main"] > div {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
-	    width: calc(100vw - 88px - 250px - 15px);
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    width: calc(100vw - 88px - 350px - 15px);
 	}
 	
 	/* ポストのカラム(メインカラム)の幅 */
 	div[data-testid="primaryColumn"],
 	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
-	    max-width: min(calc(100vw - 88px - 250px - 15px), 1000px);
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    max-width: min(calc(100vw - 88px - 350px - 15px), 1000px);
 	}
 	
 	/* RTするときに「記事読む？」 を消す */
@@ -125,8 +127,8 @@
 
 	/* メインカラムを広げる */
 	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-last-of-type(1) {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
-	    max-width: min(calc(100vw - 88px - 250px - 15px), 1000px);
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    max-width: min(calc(100vw - 88px - 350px - 15px), 1000px);
 	}
 }
 
@@ -157,12 +159,14 @@
 	}
 	
 	/* 右のサイドバーの幅 */
+	/*
 	div[data-testid="sidebarColumn"],
 	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2),
 	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
 	{
 	    width: 250px;
 	}
+	*/
 	
 	/* "「いま」を見つけよう" を少し小さくする */
 	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
@@ -172,8 +176,8 @@
 	
 	/* 右のサイドバーを右に寄せる */
 	main[role="main"] > div {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
-	    width: calc(100vw - 88px - 250px - 15px);
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    width: calc(100vw - 88px - 350px - 15px);
 	}
 	
 	/* Xでライブ放送するを非表示 */
