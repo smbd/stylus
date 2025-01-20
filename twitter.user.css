@@ -8,13 +8,13 @@
 @updateURL    https://raw.githubusercontent.com/smbd/stylus/refs/heads/main/twitter.user.css
 ==/USerStyle== */
 
-/** 全体共通 **/
 @-moz-document url-prefix("https://x.com/") {
+/** 全体共通 **/
+
 	/* 左のサイドバーを左に寄せる */
 	header[role="banner"] {
 	    flex-grow: 0;
 	}
-	
 	header[role="banner"] > div {
 	    margin-left: 0px;
 	}
@@ -49,7 +49,6 @@
 	{
 	    display: none; 
 	}
-	
 	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-last-of-type(1) {
 	    margin: 0;
 	}
@@ -60,16 +59,17 @@
     }
 }
 
-/** HOME 通知 検索 ハッシュタグ ポスト作成 ブックマーク リスト 個々のポスト コミュニティ **/
 @-moz-document url-prefix("https://x.com/home"),
-               url-prefix("https://x.com/notifications"),
-	       url-prefix("https://x.com/search"),
-	       url-prefix("https://x.com/hashtag/"),
-	       url-prefix("https://x.com/compose/post"),
-	       url-prefix("https://x.com/i/bookmarks"),
-	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/lists(/\\d+)?"),
-	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?"),
-	       regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
+            	url-prefix("https://x.com/notifications"),
+	      		url-prefix("https://x.com/search"),
+	       		url-prefix("https://x.com/hashtag/"),
+	       		url-prefix("https://x.com/compose/post"),
+	       		url-prefix("https://x.com/i/bookmarks"),
+	       		regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/lists(/\\d+)?"),
+	       		regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?"),
+	       		regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
+/** HOME 通知 検索 ハッシュタグ ポスト作成 ブックマーク リスト 個々のポスト コミュニティ **/
+
 	/* ヘッダの「フォロー中」を非表示 */
 	main div[data-testid="primaryColumn"] nav[role="navigation"]:not(:has(a[href^="/search"])) {
 	    display: none;
@@ -120,8 +120,9 @@
 	}
 }
 
-/** ブックマーク **/
 @-moz-document url-prefix("https://x.com/i/bookmarks") {
+/** ブックマーク **/
+
 	/* メインカラムを広げる */
 	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-last-of-type(1) {
 	    /* 左のサイドバー: 88px, 右のサイドバー: 250px, 右のサイドバーの右の余白: 15px */
@@ -129,9 +130,10 @@
 	}
 }
 
-/** コミュニティノート **/
 @-moz-document url-prefix("https://x.com/i/communitynotes"),
                url-prefix("https://x.com/i/birdwatch") {
+/** コミュニティノート **/
+
 	/* メインカラムを広げる */
 	div[data-testid="primaryColumn"] {
 	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
@@ -144,8 +146,9 @@
 	}
 }
 
-/** 個人のページ **/
 @-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
+/** 個人のページ **/
+
 	/* メインカラム */
 	div[data-testid="primaryColumn"],
 	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
