@@ -53,6 +53,11 @@
 	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-last-of-type(1) {
 	    margin: 0;
 	}
+
+    /* GROKのpopupボタンを消す */
+    div[data-testid="GrokDrawer"] {
+        display: none;
+    }
 }
 
 /** HOME 通知 検索 ハッシュタグ ポスト作成 ブックマーク リスト 個々のポスト コミュニティ **/
