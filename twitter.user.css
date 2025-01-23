@@ -158,9 +158,11 @@
 	}
 		
 	/* RT済のポストを非表示 */
+	/*
 	article:has(div > button[data-testid="unretweet"]) {
 	    display: none;
 	}
+	*/
 }
 
 @-moz-document url-prefix("https://x.com/i/bookmarks") {
