@@ -1,14 +1,57 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.3.1
+@version        1.4.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
 @updateURL      https://github.com/smbd/stylus/raw/refs/heads/main/x-for-smartphone.user.css
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://x.com/home") {
+@-moz-document url-prefix("https://x.com/") {
+/* 共通 */
+    /* サイドバーの「プレミアム」「ビジネス」「収益化」「広告」「求人」 */
+    div[role="dialog"] div:has(> a[href="/i/premium_sign_up"]),
+    div[role="dialog"] div:has(> a[href="/i/verified-orgs-signup"]),
+    div[role="dialog"] div:has(> a[href="/i/monetization"]),
+    div[role="dialog"] div:has(> a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"]),
+    div[role="dialog"] div:has(> a[href="/jobs"])
+    {
+        display: none;
+    }
+
+    /* ポスト毎のインプレッションを非表示 (タップすると戻れなくなるので) */
+    article[data-testid="tweet"] div:has(> a[href$="/analytics"]) {
+        display: none;
+    }
+
+    /* 「パロディアカウント」のラベルを非表示 */
+    div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
+    /** 引用ポストの中 **/
+    div:has(> div > div[data-testid="Tweet-User-Avatar"]) > div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"]) {
+            display: none;
+    }
+    
+    /* 「自動」のラベルを非表示 */
+    div:has(> div > div > div > svg > g > path[d="M10.998 15V9h2v6h-2zm22 0V9h-2v6h2zM12 2c-4.418 0-8 3.58-8 8v7c0 2.76 2.239 5 5 5h6c2.761 0 5-2.24 5-5v-7c0-4.42-3.582-8-8-8zM8.998 14c-1.105 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.895 2-2 2zm6 0c-1.104 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.896 2-2 2z"]),
+    div:has(> div > div > div > svg > g > path[d="M.998 15V9h2v6h-2zm22 0V9h-2v6h2zM12 2c-4.418 0-8 3.58-8 8v7c0 2.76 2.239 5 5 5h6c2.761 0 5-2.24 5-5v-7c0-4.42-3.582-8-8-8zM8.998 14c-1.105 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.895 2-2 2zm6 0c-1.104 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.896 2-2 2z"])
+    {
+        display: none;
+    }
+    
+    /* ポストの右上のGrokボタンを非表示 */
+    div:has(> button[aria-label*="Grok"]) {
+        display:none;
+    }
+
+    /* 下部のGrokボタンを非表示 */
+    a[href="/i/grok"] {
+        display: none;
+    }
+}
+
+@-moz-document url("https://x.com/home") {
+/* HOME */
     /* 「さんがポストしました」 */
     button:has(> div > div[data-testid="pillLabel"]) {
         display: none;
@@ -16,11 +59,6 @@
     
     /* ライブのヘッダを非表示 */
     nav[aria-live="polite"]:has(div[data-testid="placementTracking"] > button) {
-        display: none;
-    }
-    
-    /* ポスト毎のインプレッションを非表示 (タップすると戻れなくなるので) */
-    article[data-testid="tweet"] div:has(> a[href$="/analytics"]) {
         display: none;
     }
     
@@ -33,9 +71,8 @@
     article:has(div > button[data-testid="unretweet"]) {
         display: none;
     }
+}
 
-    /* 「パロディアカウント」のラベルを非表示 */
-    div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]) {
-            display: none;
-    }
+@-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+") {
+/* 個々のポストのページ */
 }
