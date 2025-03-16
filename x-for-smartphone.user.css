@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.5.0
+@version        1.6.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -44,15 +44,40 @@
         display:none;
     }
 
-    /* 下部のGrokボタンを非表示 */
-    a[href="/i/grok"] {
+    /* 下部のGrok/DM/コミュニティボタンを非表示 */
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/i/grok"],
+	div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/messages"],
+	div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href$="/communities"]
+	{
         display: none;
     }
-    
+
+    /* 下部のアイコンの高さを縮める */
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a > div > div > svg {
+	    width: 1rem;
+	    height: 1rem;
+    }
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a > div {
+	    padding: 0.5rem;
+	    margin: 0px;
+    }
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] {
+	    height: 1.5rem;
+    }
     /* blueバッジを非表示 */
-	div > span:has(> svg[data-testid="icon-verified"]) {
-		display: none;
-	}
+    div > span:has(> svg[data-testid="icon-verified"]) {
+        display: none;
+    }
+
+    /* リポストするときの「まず記事を読んでみませんか？」を非表示 */
+    div[role="menu"] div[data-testid="mask"] + div > a[href^="https://t.co/"] {
+        display: none;
+    }
+
+    /* ポストの下のGrokになんか聞くボタンを非表示 */
+    div:has(> div[data-testid^="followups_"] > div[data-testid="placementTracking"]) {
+        display: none;
+    }
 }
 
 @-moz-document url("https://x.com/home") {
@@ -67,11 +92,6 @@
         display: none;
     }
     
-    /* リポストするときの「まず記事を読んでみませんか？」を非表示 */
-    div[role="menu"] div[data-testid="mask"] + div > a[href^="https://t.co/"] {
-        display: none;
-    }
-
     /* RT済のポストを非表示 */
     article:has(div > button[data-testid="unretweet"]) {
         display: none;
