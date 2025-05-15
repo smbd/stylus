@@ -110,6 +110,13 @@
 	    padding-left: 4px;
     }
 }
+@-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
+/* 個人のページ */
+    /* 「まだ認証されていません」 */
+    div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div {
+        display: none;
+    }
+}
 
 @-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+") {
 /* 個々のポストのページ */
