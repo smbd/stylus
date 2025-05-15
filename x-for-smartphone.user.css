@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.7.0
+@version        1.7.1
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -17,39 +17,69 @@
     div[role="dialog"] div:has(> a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"]),
     div[role="dialog"] div:has(> a[href="/jobs"])
     {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* ポスト毎のインプレッションを非表示 (タップすると戻れなくなるので) */
     article[data-testid="tweet"] div:has(> a[href$="/analytics"]) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* 「パロディアカウント」のラベルを非表示 */
     div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
     /** 引用ポストの中 **/
     div:has(> div > div[data-testid="Tweet-User-Avatar"]) > div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"]) {
-            display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
     
     /* 「自動」のラベルを非表示 */
     div:has(> div > div > div > svg > g > path[d="M10.998 15V9h2v6h-2zm22 0V9h-2v6h2zM12 2c-4.418 0-8 3.58-8 8v7c0 2.76 2.239 5 5 5h6c2.761 0 5-2.24 5-5v-7c0-4.42-3.582-8-8-8zM8.998 14c-1.105 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.895 2-2 2zm6 0c-1.104 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.896 2-2 2z"]),
     div:has(> div > div > div > svg > g > path[d="M.998 15V9h2v6h-2zm22 0V9h-2v6h2zM12 2c-4.418 0-8 3.58-8 8v7c0 2.76 2.239 5 5 5h6c2.761 0 5-2.24 5-5v-7c0-4.42-3.582-8-8-8zM8.998 14c-1.105 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.895 2-2 2zm6 0c-1.104 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.896 2-2 2z"])
     {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
     
     /* ポストの右上のGrokボタンを非表示 */
     div:has(> button[aria-label*="Grok"]) {
-        display:none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* 下部のGrok/DM/コミュニティボタンを非表示 */
     div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/i/grok"],
-	div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/messages"],
-	div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href$="/communities"]
-	{
-        display: none;
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/messages"],
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href$="/communities"]
+    {
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* 下部のアイコンの高さを縮める */
@@ -66,17 +96,32 @@
     }
     /* blueバッジを非表示 */
     div > span:has(> svg[data-testid="icon-verified"]) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* リポストするときの「まず記事を読んでみませんか？」を非表示 */
     div[role="menu"] div[data-testid="mask"] + div > a[href^="https://t.co/"] {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* ポストの下のGrokになんか聞くボタンを非表示 */
     div:has(> div[data-testid^="followups_"] > div[data-testid="placementTracking"]) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 }
 
@@ -84,17 +129,32 @@
 /* HOME */
     /* 「さんがポストしました」 */
     button:has(> div > div[data-testid="pillLabel"]) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
     
     /* ライブのヘッダを非表示 */
     nav[aria-live="polite"]:has(div[data-testid="placementTracking"] > button) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
     
     /* RT済のポストを非表示 */
     article:has(div > button[data-testid="unretweet"]) {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
     /* ユーザーのアイコンを小さくする */
@@ -114,7 +174,12 @@
 /* 個人のページ */
     /* 「まだ認証されていません」 */
     div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div {
-        display: none;
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 }
 
