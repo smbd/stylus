@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.8.0
+@version        1.9.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -15,6 +15,13 @@
         display: none;
     }
 
+    /* ポストの下のリクションが右に寄りすぎていて、誤タップするのを修正 */
+    article[data-testid="tweet"] div:has(> div > a[href$="/analytics"]) > div:nth-last-of-type(2),
+    article[data-testid="tweet"] div:has(> div > a[href$="/analytics"]) > div:last-of-type
+    {
+        margin-right: 3rem;
+    }
+    
     /* 「パロディアカウント」のラベルを非表示 */
     div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
     /** 引用ポストの中 **/
@@ -58,17 +65,10 @@
     }
 
     /* 下部のアイコンの高さを縮める */
-    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a > div > div > svg {
-	    width: 1rem;
-	    height: 1rem;
-    }
-    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a > div {
-	    padding: 0.5rem;
-	    margin: 0px;
-    }
     div[data-testid="BottomBar"] > div > nav[role="navigation"] {
-	    height: 1.5rem;
+	    height: 2rem;
     }
+	
     /* blueバッジを非表示 */
     div > span:has(> svg[data-testid="icon-verified"]) {
         opacity: 0 !important;
@@ -101,11 +101,23 @@
 
     /* ポストの右上の … を大きくする */
     article[data-testid="tweet"] button[data-testid="caret"][aria-haspopup="menu"] > div > div > svg {
-	    width: 40px;
+	width: 40px;
         height: auto;
         margin-bottom: -20px;
         top: -15px;
         right: -10px;
+    }
+
+    /* … をタップしたときに出てくるpopup */
+    div[data-testid="sheetDialog"] > div[role="menuitem"],
+    div[data-testid="sheetDialog"] > a[role="menuitem"]
+    {
+        font-size: 1.5rem;
+        padding-bottom: 20px;
+    }
+    div[data-testid="sheetDialog"] > div[role="menuitem"] > div > div,
+    div[data-testid="sheetDialog"] > a[role="menuitem"] > div > div {
+        font-size: 1.5rem;
     }
 }
 
