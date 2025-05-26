@@ -68,7 +68,10 @@
 	}
 
     	/* 「パロディアカウント」のラベルを非表示 */
-    	div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"]) {
+    	div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
+    	/** 引用ポストの中 **/
+    	div:has(> div > div[data-testid="Tweet-User-Avatar"]) > div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"])
+	{
 		display: none;
     	}
 }
