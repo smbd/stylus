@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.9.0
+@version        1.10.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -66,9 +66,9 @@
 
     /* 下部のアイコンの高さを縮める */
     div[data-testid="BottomBar"] > div > nav[role="navigation"] {
-	    height: 2rem;
+        height: 2rem;
     }
-	
+
     /* blueバッジを非表示 */
     div > span:has(> svg[data-testid="icon-verified"]) {
         opacity: 0 !important;
@@ -119,6 +119,24 @@
     div[data-testid="sheetDialog"] > a[role="menuitem"] > div > div {
         font-size: 1.5rem;
     }
+    
+    /* 自分のアイコンをタップした時に出てくるサイドバー */
+    /** プレミアム **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/i/premium_sign_up"]),
+    /** 認証済組織 **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/i/verified-orgs-signup"]),
+    /** 収益化 **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/i/monetization"]),
+    /** 広告 **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"]),
+    /** 求人 **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/jobs"]),
+    /** ログアウト **/
+    h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/logout"])
+    {
+        display: none;
+    }
+    
 }
 
 @-moz-document url("https://x.com/home") {
