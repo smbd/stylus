@@ -11,7 +11,7 @@
 ==/UserStyle== */
 
 @-moz-document url("https://x.com/home") {
-@HomeTimelineSelector: 'h2 + div#layers + div div[data-testid="primaryColumn"] > div > div:has(div[data-testid="ScrollSnap-List"] > div[role="presentation"]:nth-of-type(1) > a[href="/home"][aria-selected="true"])';
+@HomeTimelineSelector: 'div[data-testid="TopNavBar"] nav[role="navigation"] div[data-testid="ScrollSnap-SwipeableList"] > div[data-testid="ScrollSnap-List"] > div:nth-of-type(1)';
 @AccountSelectorPrefix: 'div > section[role="region"] > h1[role="heading"] + div > div > div:has(> div > div > article div[data-testid="User-Name"] > div > div > a[href="/';
 
 each(@accounts, {
