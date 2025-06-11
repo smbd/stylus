@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com hide_accounts
 @namespace      smbd.jp
-@version        1.0.3
+@version        1.0.4
 @description    hide accounts in x.com timeline
 @author         smbd
 @license        MIT
@@ -11,11 +11,13 @@
 ==/UserStyle== */
 
 @-moz-document url("https://x.com/home") {
-@HomeTimelineSelector: 'div[data-testid="TopNavBar"] nav[role="navigation"] div[data-testid="ScrollSnap-SwipeableList"] > div[data-testid="ScrollSnap-List"] > div:nth-of-type(1)';
+
+@HomeTimelineSelector: 'div[data-testid="primaryColumn"] > div:nth-of-type(1):has(> div:nth-of-type(1) nav[role="navigation"] > div > div[data-testid="ScrollSnap-SwipeableList"] > div[data-testid="ScrollSnap-List"] > div[role="presentation"]:nth-of-type(1) > a[href="/home"] > div > div[dir="ltr"] > div[style*="background-color"])';
+
 @AccountSelectorPrefix: 'div > section[role="region"] > h1[role="heading"] + div > div > div:has(> div > div > article div[data-testid="User-Name"] > div > div > a[href="/';
 
 each(@accounts, {
-    @selector: ~'@{HomeTimelineSelector} ~ @{AccountSelectorPrefix}@{value}"])';
+    @selector: ~'@{HomeTimelineSelector} > @{AccountSelectorPrefix}@{value}"])';
     &@{selector} {
         opacity: 0 !important;
         pointer-events: none;
@@ -28,4 +30,5 @@ each(@accounts, {
         */
     }
 });
+}
 }
