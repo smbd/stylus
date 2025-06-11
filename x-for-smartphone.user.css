@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.10.0
+@version        1.10.1
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -162,6 +162,7 @@
     }
     
     /* RT済のポストを非表示 */
+    /*
     article:has(div > button[data-testid="unretweet"]) {
         opacity: 0 !important;
         pointer-events: none;
@@ -170,6 +171,7 @@
         padding: 0;
         overflow: hidden;
     }
+    */
 
     /* ユーザーのアイコンを小さくする */
     div[data-testid="Tweet-User-Avatar"] div[data-testid^="UserAvatar-Container-"] {
