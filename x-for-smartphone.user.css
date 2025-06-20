@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.10.1
+@version        1.11.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -89,6 +89,19 @@
         overflow: hidden;
     }
 
+    /* ユーザーのアイコンを小さくする */
+    div[data-testid="Tweet-User-Avatar"] div[data-testid^="UserAvatar-Container-"] {
+	    width: 30px !important;
+	    height: 30px !important;
+    }
+    article[data-testid="tweet"] > div > div > div:nth-of-type(2) > div:has(> div[data-testid="Tweet-User-Avatar"]) {
+	    flex-basis: 30px;
+	    margin-right: 4px;
+    }
+    article[data-testid="tweet"] {
+	    padding-left: 2px;
+    }
+
     /* ポストの下のGrokになんか聞くボタンを非表示 */
     div:has(> div[data-testid^="followups_"] > div[data-testid="placementTracking"]) {
         opacity: 0 !important;
@@ -99,27 +112,6 @@
         overflow: hidden;
     }
 
-    /* ポストの右上の … を大きくする */
-    article[data-testid="tweet"] button[data-testid="caret"][aria-haspopup="menu"] > div > div > svg {
-	width: 40px;
-        height: auto;
-        margin-bottom: -20px;
-        top: -15px;
-        right: -10px;
-    }
-
-    /* … をタップしたときに出てくるpopup */
-    div[data-testid="sheetDialog"] > div[role="menuitem"],
-    div[data-testid="sheetDialog"] > a[role="menuitem"]
-    {
-        font-size: 1.5rem;
-        padding-bottom: 20px;
-    }
-    div[data-testid="sheetDialog"] > div[role="menuitem"] > div > div,
-    div[data-testid="sheetDialog"] > a[role="menuitem"] > div > div {
-        font-size: 1.5rem;
-    }
-    
     /* 自分のアイコンをタップした時に出てくるサイドバー */
     /** プレミアム **/
     h2[role="heading"] + div#layers div[role="dialog"] div:has(> a[href="/i/premium_sign_up"]),
@@ -173,17 +165,48 @@
     }
     */
 
-    /* ユーザーのアイコンを小さくする */
-    div[data-testid="Tweet-User-Avatar"] div[data-testid^="UserAvatar-Container-"] {
-	    width: 30px !important;
-	    height: 30px !important;
+    /* ポストの右上の … を大きくする */
+    article[data-testid="tweet"] button[data-testid="caret"][aria-haspopup="menu"] > div > div > svg {
+	width: 40px;
+        height: auto;
+        margin-bottom: -20px;
+        top: -15px;
+        right: -10px;
     }
-    article[data-testid="tweet"] > div > div > div:nth-of-type(2) > div:has(> div[data-testid="Tweet-User-Avatar"]) {
-	    flex-basis: 30px;
-	    margin-right: 4px;
+    
+    /* … をタップしたときに出てくるpopup */
+    div[data-testid="sheetDialog"] > div[role="menuitem"],
+    div[data-testid="sheetDialog"] > a[role="menuitem"]
+    {
+        font-size: 1.5rem;
+        padding-bottom: 20px;
     }
-    article[data-testid="tweet"] {
-	    padding-left: 4px;
+    div[data-testid="sheetDialog"] > div[role="menuitem"] > div > div,
+    div[data-testid="sheetDialog"] > a[role="menuitem"] > div > div {
+        font-size: 1.5rem;
+    }
+    
+    /** 行間を空ける **/
+    /*** このポストに興味が無い ***/
+    div[data-testid="sheetDialog"] > div[role="menuitem"]:nth-child(1),
+    /*** リストに追加/削除 ***/
+    div[data-testid="sheetDialog"] > a[role="menuitem"][href="/i/lists/add_member"]
+    {
+        margin-bottom: 2em;
+    }    
+    /** 消す **/
+    /*** ポストのエンゲージメントを表示 ***/
+    div[data-testid="sheetDialog"] > a[role="menuitem"][data-testid="tweetEngagements"],
+    /*** ポストを埋め込む ***/
+    div[data-testid="sheetDialog"] > a[role="menuitem"][data-testid="tweetEngagements"] + div[role="menuitem"],
+    /*** ポストを報告 ***/
+    div[data-testid="sheetDialog"] > div[role="menuitem"][data-testid="report"],
+    /*** コミュニティノートを作成 ***/
+    div[data-testid="sheetDialog"] > a[role="menuitem"][href^="/i/communitynotes/contribute/"],
+    /*** コミュニティーノートをリクエスト ***/
+    div[data-testid="sheetDialog"] > a[role="menuitem"][href^="/i/communitynotes/noterequest/"]
+    {
+        display: none;
     }
 }
 @-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
@@ -201,4 +224,9 @@
 
 @-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+") {
 /* 個々のポストのページ */
+    /* フォローボタンと … の間を空ける */
+    div:has(> button[data-testid$="-follow"]) {
+        margin-right: 30px;
+    }
 }
+
