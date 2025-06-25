@@ -1,24 +1,24 @@
 /* ==UserStyle==
 @name           x.com hide_accounts
 @namespace      smbd.jp
-@version        1.0.5
+@version        1.1.0
 @description    hide accounts in x.com timeline
 @author         smbd
 @license        MIT
 @updateURL      https://github.com/smbd/stylus/raw/refs/heads/main/x-hide-accounts.user.css
 @preprocessor   less
-@var            text accounts "comma delimited list of accounts to hide" none
 ==/UserStyle== */
 
 @-moz-document url("https://x.com/home") {
 
-//@accounts: kiri_tori, kiri_tory;
+@accounts: kiri_tori, kiri_tory, UN_NERV, earthquake_jp, Trainfo;
 
 @HomeTimelineSelector: 'div#layers:has(div[data-testid="ScrollSnap-List"] > div[role="presentation"]:nth-of-type(1) > a[href="/home"][aria-selected="true"])';
 @AccountSelectorPrefix: 'div > main[role="main"] div[data-testid="primaryColumn"] section[role="region"] div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"] div[data-testid="User-Name"] a[href="/';
 
 each(@accounts, {
-    @selector: ~'@{HomeTimelineSelector} + @{AccountSelectorPrefix}@{value}"])';
+    //@selector: ~'@{HomeTimelineSelector} + @{AccountSelectorPrefix}@{value}"])';
+    @selector: ~'@{AccountSelectorPrefix}@{value}"])';
     &@{selector} {
         opacity: 0 !important;
         pointer-events: none;
