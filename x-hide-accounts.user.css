@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com hide_accounts
 @namespace      smbd.jp
-@version        1.1.0
+@version        1.1.1
 @description    hide accounts in x.com timeline
 @author         smbd
 @license        MIT
@@ -20,15 +20,15 @@ each(@accounts, {
     //@selector: ~'@{HomeTimelineSelector} + @{AccountSelectorPrefix}@{value}"])';
     @selector: ~'@{AccountSelectorPrefix}@{value}"])';
     &@{selector} {
+        /*
         opacity: 0 !important;
         pointer-events: none;
         height: 0;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        /*
-        background-color: red;
         */
+        background-color: gray;
     }
 });
 }
