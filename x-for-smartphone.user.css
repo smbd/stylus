@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.11.1
+@version        1.12.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -196,6 +196,16 @@
     div[data-testid="sheetDialog"] > a[role="menuitem"][href^="/i/communitynotes/noterequest/"]
     {
         display: none;
+    }
+
+    /* 「興味が無い」をタップしたポストの残骸 */
+    div:has(> div > div + div[role="group"] > button[role="button"][type="button"] + button[role="button"][type="button"] > div[dir="ltr"] > span) {
+        opacity: 0 !important;
+        pointer-events: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 }
 @-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
