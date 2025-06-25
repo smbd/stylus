@@ -17,18 +17,17 @@
 @AccountSelectorPrefix: 'div > main[role="main"] div[data-testid="primaryColumn"] section[role="region"] div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"] div[data-testid="User-Name"] a[href="/';
 
 each(@accounts, {
-    //@selector: ~'@{HomeTimelineSelector} + @{AccountSelectorPrefix}@{value}"])';
-    @selector: ~'@{AccountSelectorPrefix}@{value}"])';
+    @selector: ~'@{HomeTimelineSelector} + @{AccountSelectorPrefix}@{value}"])';
     &@{selector} {
-        /*
         opacity: 0 !important;
         pointer-events: none;
         height: 0;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        */
+        /*
         background-color: gray;
+        */
     }
 });
 }
