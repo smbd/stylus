@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.13.0
+@version        1.14.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -186,6 +186,11 @@
     /* Xロゴを消した後、上に詰める */
     div[data-testid="TopNavBar"] > div > div > div {
         height: 20px;
+    }
+
+    /* 右上のプレミアム加入ボタンを消す */
+    div:has(> div > div > div[data-testid="super-upsell-UpsellButtonRenderProperties"]) {
+        display: none;
     }
 }
 
