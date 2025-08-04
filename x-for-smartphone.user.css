@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.14.0
+@version        1.15.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -194,7 +194,7 @@
     }
 }
 
-@-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+$"), regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/media|/highlights)") {
+@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+\\/status)(/|$))[^/]+\\/?$"), regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+\\/status)(/|$))[^/]+\\/(/with_replies|/media|/highlights)") {
 /* 個人のページ */
     /* 「まだ認証されていません」 */
     div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div,
@@ -202,7 +202,6 @@
     {
         display: none;
     }
-
     /* 上部の余白を消す */
     header[role="banner"] {
         display: none;
@@ -211,13 +210,18 @@
         top: -100px;
     }
     
+    /* DMボタンを消す */
+    button[data-testid="sendDMFromProfile"] {
+        display: none;
+    }
+    
     /* 通知をオンにする を消す */
-    button[data-testid="userActions"] + div {
+    button[data-testid="userActions"] ~ div:has(> button) {
         display: none;
     }
 }
 
-@-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+") {
+@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search))[A-Za-z0-9_]+/status/\\d+") {
 /* 個々のポストのページ */
     /* フォローボタンと … の間を空ける */
     div:has(> button[data-testid$="-follow"]) {
@@ -230,6 +234,11 @@
     /* GIFボタン を消す */
     div[data-testid="ScrollSnap-List"] > div:nth-of-type(2) {
         display: none;
+    }
+    /* 画像アイコンの右のスペースを開ける */
+    div[data-testid="ScrollSnap-List"] > div:nth-of-type(1) {
+        margin-left: 2rem;
+        margin-right: 3rem;
     }
 }
 
@@ -272,7 +281,7 @@
     }
 }
 
-@-moz-document regexp("https://x\.com/smbd/status/\d+") {
+@-moz-document regexp("https://x.com/smbd/status/\\d+") {
 /* 自分の個々のポストのページ */
     /* ポストアナリティクスに移動 を消す */
     div:has(> div > div > a[href="/i/account_analytics"]) {
