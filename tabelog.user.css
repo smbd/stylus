@@ -1,0 +1,13 @@
+/* ==UserStyle==
+@name           hide use app dialog in tabelog.com
+@namespace      smbd.jp
+@version        1.0.0
+@description    スマホ版の食べログで「アプリを使いませんか？」のダイアログを消す
+@author         smbd
+==/UserStyle== */
+
+@-moz-document domain("s.tabelog.com") {
+    div#js-webtoapp-floating-banner {
+        display: none;
+    }
+}
