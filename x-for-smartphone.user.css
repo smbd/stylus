@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.15.1
+@version        1.15.2
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -194,7 +194,7 @@
     }
 }
 
-@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+\\/status)(/|$))[^/]+\\/?$"), regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+\\/status)(/|$))[^/]+\\/(/with_replies|/media|/highlights)") {
+@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+/status)[/?$])[^/]+(/?$|/(with_replies|media|highlights))") {
 /* 個人のページ */
     /* 「まだ認証されていません」 */
     div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div,
