@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.15.2
+@version        1.16.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -60,7 +60,7 @@
 
     /* 下部のアイコンの高さを縮める */
     div[data-testid="BottomBar"] > div > nav[role="navigation"] {
-        height: 2rem;
+        height: 3rem;
     }
 
     /* blueバッジを非表示 */
@@ -194,41 +194,6 @@
     }
 }
 
-@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search|[^/]+/status)[/?$])[^/]+(/?$|/(with_replies|media|highlights))") {
-/* 個人のページ */
-    /* 「まだ認証されていません」 */
-    div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div,
-    div[data-testid="verified_profile_visitor_upsell"]
-    {
-        display: none;
-    }
-    /* 上部の余白を消す */
-    header[role="banner"] {
-        display: none;
-    }
-    div[data-testid="TopNavBar"] {
-        top: -100px;
-    }
-    
-    /* DMボタンを消す */
-    button[data-testid="sendDMFromProfile"] {
-        display: none;
-    }
-    
-    /* 通知をオンにする を消す */
-    button[data-testid="userActions"] ~ div:has(> button) {
-        display: none;
-    }
-}
-
-@-moz-document regexp("https://x.com/(?!(compose|explore|hashtag|home|i|notifications|search))[A-Za-z0-9_]+/status/\\d+") {
-/* 個々のポストのページ */
-    /* フォローボタンと … の間を空ける */
-    div:has(> button[data-testid$="-follow"]) {
-        margin-right: 30px;
-    }
-}
-
 @-moz-document url("https://x.com/compose/post") {
 /* ポストの新規作成ページ */
     /* GIFボタン を消す */
@@ -243,7 +208,7 @@
     }
 }
 
-@-moz-document regexp("https://x.com/notifications(/mentions)?") {
+@-moz-document regexp("https://x.com/notifications(/mentions)?$") {
 /* 通知 */
     /* 認証済 タブを消す */
     div[role="presentation"] > a[href="/notifications/verified"] {
@@ -257,23 +222,47 @@
     }
 }
 
-@-moz-document regexp("https://x.com/smbd/?$"), regexp("https://x.com/smbd/(with_replies|media|likes)") {
-/* 自分のページ */
+@-moz-document regexp("https://x.com/(?!(compose/post|explore|hashtag|home|i|notifications|search))\w+(/(with_replies|media|likes))?$") {
+/* 個人のページ */
     /* 認証される を消す */
-    div[data-testid="UserName"] > div:nth-of-type(2) {
+    div[data-testid="UserName"] > div:nth-of-type(2):has(a[href="/i/premium_sign_up"]) {
+        display: none;
+    }
+
+    /* 「まだ認証されていません」 */
+    div[data-testid="primaryColumn"] a[href$="/header_photo"] + div + div,
+    div[data-testid="verified_profile_visitor_upsell"]
+    {
+        display: none;
+    }
+
+    /* 上部の余白を消す */
+    /*
+    header[role="banner"] {
+        display: none;
+    }
+    div[data-testid="TopNavBar"] {
+        top: -100px;
+    }
+    */
+    
+    /* DMボタンを消す */
+    button[data-testid="sendDMFromProfile"] {
+        display: none;
+    }
+    
+    /* 通知をオンにする を消す */
+    button[data-testid="userActions"] ~ div:has(> button) {
         display: none;
     }
 
     /* ハイライト 記事 を消す*/
-    div[role="presentation"] > a[href="/smbd/highlights"],
-    div[role="presentation"] > a[href="/smbd/articles"]
+    div[role="presentation"] > a[href$="/highlights"],
+    div[role="presentation"] > a[href$="/articles"]
     {
         display: none;
     }
-}
 
-@-moz-document url("https://x.com/smbd/likes") {
-/* 自分のいいねページ */
     /* インプレッションを獲得しました いいねは非公開です を消す */
     div[data-testid="analytics-preview"],
     div[aria-live="polite"][role="status"]
@@ -282,8 +271,13 @@
     }
 }
 
-@-moz-document regexp("https://x.com/smbd/status/\\d+") {
-/* 自分の個々のポストのページ */
+@-moz-document regexp("https://x.com/(?!(compose/post|explore|hashtag|home|i|notifications|search))\w+/status/\d+$") {
+/* 個々のポストのページ */
+    /* フォローボタンと … の間を空ける */
+    div:has(> button[data-testid$="-follow"]) {
+        margin-right: 30px;
+    }
+
     /* ポストアナリティクスに移動 を消す */
     div:has(> div > div > a[href="/i/account_analytics"]) {
         display: none;
