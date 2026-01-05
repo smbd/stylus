@@ -52,7 +52,7 @@
 
     /* 下部のGrok/DM/コミュニティボタンを非表示 */
     div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/i/grok"],
-    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/messages"],
+    div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href="/i/chat"],
     div[data-testid="BottomBar"] > div > nav[role="navigation"] > a[href$="/communities"]
     {
         display: none;
