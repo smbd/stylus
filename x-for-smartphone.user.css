@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.16.1
+@version        1.16.2
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -20,7 +20,7 @@
 @-moz-document url-prefix("https://x.com/") {
 /* 共通 */
     /* ポスト毎のインプレッションを非表示 (タップすると戻れなくなるので) */
-    article[data-testid="tweet"] div:has(> a[href$="/analytics"]) {
+    article[data-testid="tweet"] div > a[href$="/analytics"] {
         display: none;
     }
 
