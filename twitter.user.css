@@ -3,7 +3,7 @@
 @description  customize x.com, use with "Control Panel for Twitter" addon
 @author       smbd.jp@gmail.com
 @namespace    http://smbd.jp
-@version      1.6.0
+@version      1.7.0
 @license      MIT
 @updateURL    https://raw.githubusercontent.com/smbd/stylus/refs/heads/main/twitter.user.css
 ==/USerStyle== */
@@ -283,6 +283,13 @@
 @-moz-document url("https://x.com/notifications/mentions") {
     /* ヘッダーの謎画像 */
     main section h1[id^="accessible-list-"] + div div > div[data-testid="cellInnerDiv"]:nth-of-type(1) {
+        display: none;
+    }
+}
+
+@-moz-document url("https://x.com/home") {
+    /* CSLTの報告ボタンがTLで表示されないように */
+    article[data-testid="tweet"] div[id^="id"][cslt_tweet_process="ok"] > a.cslt_report_icon {
         display: none;
     }
 }
