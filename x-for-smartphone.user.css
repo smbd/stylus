@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           x.com for smartphone
 @namespace      http://smbd.jp
-@version        1.22.0
+@version        1.23.0
 @description    x.com for smartphone
 @author         smbd
 @license        MIT
@@ -99,6 +99,26 @@
         font-size: 1.5rem;
     }
     
+    /* 右上 … のタップで出てくるメニューの項目を消す */
+    div[data-testid="sheetDialog"] {
+        /** リストから追加/削除 **/
+        > a[role="menuitem"][href="/i/lists/add_member"],
+        /** ポストのエンゲージメントを表示 **/
+        > a[role="menuitem"][data-testid="tweetEngagements"],
+        /** ポストを埋め込む **/
+        > a[role="menuitem"][data-testid="tweetEngagements"] + div[role="menuitem"],
+        /** ポストを報告 **/
+        > div[role="menuitem"][data-testid="report"],
+        /** コミュニティノートを作成 **/
+        > a[role="menuitem"][href^="/i/communitynotes/contribute/"],
+        /** コミュニティーノートをリクエスト **/
+        > a[role="menuitem"][href^="/i/communitynotes/noterequest/"]
+        {
+            display: none;
+        }
+    }
+
+    
     /* シェアアイコンをタップしたときのメニュー */
     div[data-testid="sheetDialog"] > div[role="menuitem"][tabindex="0"]:nth-of-type(1):has(path[d="M12 4c-4.418 0-8 3.582-8 8 0 1.268.294 2.465.818 3.528.144.292.196.634.126.973l-.665 3.242 3.373-.63c.323-.061.647-.012.927.12C9.615 19.726 10.774 20 12 20c4.418 0 8-3.582 8-8s-3.582-8-8-8zM3.547 19.88zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10c-1.473 0-2.874-.32-4.136-.893l-3.949.74c-1.047.195-1.96-.733-1.745-1.777l.781-3.808C2.341 14.968 2 13.522 2 12z"]) {
         display: none;
@@ -165,22 +185,7 @@
     }
     */
 
-    /* 右上 … のタップで出てくるメニューの項目を消す */
-    div[data-testid="sheetDialog"] {
-        /** ポストのエンゲージメントを表示 **/
-        > a[role="menuitem"][data-testid="tweetEngagements"],
-        /** ポストを埋め込む **/
-        > a[role="menuitem"][data-testid="tweetEngagements"] + div[role="menuitem"],
-        /** ポストを報告 **/
-        > div[role="menuitem"][data-testid="report"],
-        /** コミュニティノートを作成 **/
-        > a[role="menuitem"][href^="/i/communitynotes/contribute/"],
-        /** コミュニティーノートをリクエスト **/
-        > a[role="menuitem"][href^="/i/communitynotes/noterequest/"]
-        {
-            display: none;
-        }
-    }
+
 
     /* 「興味が無い」をタップしたポストの残骸 */
     div:has(> div > div + div[role="group"] > button[role="button"][type="button"] + button[role="button"][type="button"] > div[dir="ltr"] > span) {
