@@ -3,106 +3,108 @@
 @description  customize x.com, use with "Control Panel for Twitter" addon
 @author       smbd.jp@gmail.com
 @namespace    http://smbd.jp
-@version      1.9.0
+@version      1.11.1
 @license      MIT
 @updateURL    https://raw.githubusercontent.com/smbd/stylus/refs/heads/main/twitter.user.css
-@var text     tweet-font-size "Font size of tweet" 17px
+@var text     tweet-font-size "Font size of tweet" 16px
 ==/USerStyle== */
 
-@-moz-document url-prefix("https://x.com/") {
-/** 全体共通 **/
+@-moz-document url-prefix("https://x.com/i/communitynotes"),
+               url-prefix("https://x.com/i/birdwatch") {
+/** コミュニティノート **/
+	/* メインカラムを広げる */
+	div[data-testid="primaryColumn"] {
+	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
+	}
+	
+	/* 右のサイドバーの幅 */
+	div[data-testid="sidebarColumn"],
+	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2)
+	{
+	    width: 200px;
+	}
+}
 
-	/* 左のサイドバーを左に寄せる */
-	header[role="banner"] {
-	    flex-grow: 0;
-	}
-	header[role="banner"] > div {
-	    margin-left: 0px;
-	}
-	
-	/* 左のサイドバーのアイコン群を真ん中寄せにする (テキストのdivを非表示にすることにより) */
-	header[role="banner"] nav[role="navigation"] > a > div > div:nth-of-type(2):has(> span),
-	header[role="banner"] button[role="button"] > div > div:nth-of-type(2):has(> span)
-	{
-	    display: none;
-	}
-	
-	/* 左のサイドバーをアイコンだけにする */
-	header[role='banner'] > div:nth-of-type(1),
-	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
-	{
-	    width: 75px;
-	}
-	
-	/* 左のサイドバーの tweetボタンをアイコンにする */
-	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] {
-	    min-width: 0px;
-	    min-height: 0px;
-	    width: 36px;
-	    height: 36px;
-	    margin: 0 10px;
-	    padding: 0;
-	    background-repeat: no-repeat;
-	    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='fill: white;' viewBox='0 0 26 26' aria-hidden='true' class='r-jwli3a r-4qtqp9 r-yyyyoo r-1472mwg r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp'%3E%3Cg%3E%3Cpath d='M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-	}
-	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] span,
-	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] svg
-	{
-	    display: none; 
-	}
-	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-last-of-type(1) {
-	    margin: 0;
-	}
-
-    	/* サイドバーの利用規約とか */
-    	div[data-testid="sidebarColumn"] div > nav[role="navigation"] {
-		display: none;
-    	}
-    
-    	div[data-testid="sidebarColumn"] div:has(div > form[role="search"]) {
-        	padding-bottom: 10px;
-    	}
-	
-    /* サイドバーのDM, クリエータースタジオを隠す */
-    header[role="banner"] nav[role="navigation"] {
-        > a[href^="/i/chat"], > a[href^="/i/jf/creators/studio"] {
-            display: none;
+@-moz-document regexp("^https://x\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\d+(/quotes|\?sort_replies=recency)?") {
+/* 個々のポスト */
+	/* ポストの横幅がHOMEと同じになるように
+       HOMEで左に表示されるアイコンの部分の幅: 44+9px
+       元々のpadding: 17px */
+    article[data-testid="tweet"] > div > div > div > div:has(> div[data-testid="tweetText"]) {
+        padding-left: calc(44px + 2px);
+        margin-top: 2px;
+        
+        + div[id^="id__"] {
+            /* 引用ポスト */
+            padding-left: calc(44px + 2px);
         }
     }
-        
-	/* GROKのpopupボタンを消す */
-	div[data-testid="GrokDrawer"] {
-        	display: none;
-	}
 
-    /* 「パロディアカウント」のラベルを非表示 */
-    div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
-    /** 引用ポストの中 **/
-    div:has(> div > div[data-testid="Tweet-User-Avatar"]) > div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"])
-	{
-		display: none;
-    }
-        
-    /* RTするときに「記事読む？」 を消す */
-	div[role="menu"] > div > div > div > a:nth-child(1) {
-	    display: none;
-	}
-
-    /* ポストのフォントサイズをページ毎に変えない */
-    article div[data-testid="tweetText"] span {
-        font-size: var(--tweet-font-size);
-    }
-    /** 絵文字 **/
-    article div[data-testid="tweetText"] img[src^="https://abs-0.twimg.com/emoji/"] {
-        height: calc(var(--tweet-font-size)*1.2);
-        width: calc(var(--tweet-font-size)*1.2);
-    }
-
-    /* 画像にマウスオーバーすると出る「画像を編集
-    article[data-testid="tweet"] div[id^="id__"] > div > div > div:has(div[data-testid="tweetPhoto"] > img) > div > div:nth-of-type(2) {
+    /* 「AIで生成」かつ「有料パートナーシップ」のポストを非表示 */
+    div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"] div > div > svg > g > path[d="M14 2c0 3.35.74 5.53 2.1 6.9 1.36 1.36 3.55 2.1 6.9 2.1v2c-3.35 0-5.54.74-6.9 2.1-1.36 1.37-2.1 3.55-2.1 6.9h-2c0-3.35-.74-5.53-2.11-6.9C8.53 13.74 6.35 13 3 13v-2c3.35 0 5.53-.74 6.89-2.1C11.26 7.53 12 5.35 12 2h2zM5 1c0 1.66-1.34 3-3 3v1c1.66 0 3 1.34 3 3h1c0-1.66 1.34-3 3-3V4C7.34 4 6 2.66 6 1H5z"]):has(div > a[href="https://help.x.com/rules-and-policies/paid-partnerships-policy"]) {
         display: none;
     }
-    */
+    
+    /* 記事の場合 */
+    main[role="main"]:has(article[data-testid="tweet"] div[data-testid="twitterArticleReadView"]) {
+        /* サイドバー非表示 */
+        div[data-testid="sidebarColumn"] {
+            display: none;
+        }
+
+        /* メインカラムを広げる */
+        > div:nth-of-type(1) {
+            width: 100%;
+        }
+        div[data-testid="primaryColumn"] {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+@-moz-document regexp("^https://x\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/media|/likes)?") {
+/** 個人のページ **/
+	/* メインカラム */
+	div[data-testid="primaryColumn"],
+	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
+	}
+	
+	/* "「いま」を見つけよう" を少し小さくする */
+	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
+	    font-size: 20px;
+	    line-height: 20px;
+	}
+	
+	/* 右のサイドバーを右に寄せる */
+	main[role="main"] > div {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    width: calc(100vw - 88px - 350px - 15px);
+	}
+
+	/* おすすめユーザーを非表示 */
+	div[data-testid="sidebarColumn"] div:has(> aside[role="complementary"]) {
+	    display: none;
+	}
+}
+
+@-moz-document url("https://x.com/notifications/mentions") {
+/* 通知のメンション */
+    /* ヘッダーの謎画像 */
+    main section h1[id^="accessible-list-"] + div div > div[data-testid="cellInnerDiv"]:nth-of-type(1) {
+        display: none;
+    }
+}
+
+@-moz-document url-prefix("https://x.com/i/bookmarks") {
+/** ブックマーク **/
+	/* メインカラムを広げる */
+	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-last-of-type(1) {
+	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
+	    max-width: min(calc(100vw - 88px - 350px - 15px), 1000px);
+	}
 }
 
 @-moz-document url-prefix("https://x.com/home"),
@@ -111,9 +113,9 @@
                url-prefix("https://x.com/hashtag/"),
                url-prefix("https://x.com/compose/post"),
                url-prefix("https://x.com/i/bookmarks"),
-               regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/lists(/\\d+)?"),
-               regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?"),
-               regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
+               regexp("^https://x\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/lists(/\d+)?"),
+               regexp("^https://x\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\d+(/quotes|\?sort_replies=recency)?"),
+               regexp("^https://x\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/communities/explore") {
 /** HOME 通知 検索 ハッシュタグ ポスト作成 ブックマーク リスト 個々のポスト コミュニティ **/
 
     
@@ -131,20 +133,19 @@
 	    line-height: 20px;
 	}
 	
-	/* 右のサイドバーを右に寄せる */
-	main[role="main"] > div {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 300px, 右のサイドバーの右の余白: 15px */
-	    width: calc(100vw - 88px - 300px - 15px);
-	}
-	
 	/* ポストのカラム(メインカラム)の幅 */
-	div[data-testid="primaryColumn"],
-	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1)
-	{
-	    /* 左のサイドバー: 88px, 右のサイドバー: 300px, 右のサイドバーの右の余白: 15px */
-	    max-width: min(calc(100vw - 88px - 300px - 15px), 1000px);
-	}
-	
+    main[role="main"]:not(:has(article[data-testid="tweet"] div[data-testid="twitterArticleReadView"])) {
+	    div[data-testid="primaryColumn"],
+	    div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) {
+	        /* 左のサイドバー: 50px, 右のサイドバー: 300px */
+            width: calc(100vw - 300px - 50px);
+            max-width: 1048px;
+        }
+    }
+    article[data-testid="tweet"] {
+        padding-right: 8px;
+    }
+    
 	/*  「Xでライブ放送する」を非表示 */
 	/*
 	div[data-testid="sidebarColumn"] div:has(> div[data-testid="placementTracking"]) {
@@ -209,7 +210,7 @@
     div:has(> div[id^="id__"] > div > div > svg > g > path[d="M.998 15V9h2v6h-2zm22 0V9h-2v6h2zM12 2c-4.418 0-8 3.58-8 8v7c0 2.76 2.239 5 5 5h6c2.761 0 5-2.24 5-5v-7c0-4.42-3.582-8-8-8zM8.998 14c-1.105 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.895 2-2 2zm6 0c-1.104 0-2-.9-2-2s.895-2 2-2 2 .9 2 2-.896 2-2 2z"]) {
         display: none;
     }
-
+    
     /* CSLTボタン */
     div[cslt_tweet_process="ok"] {
         max-width: 750px;
@@ -219,91 +220,181 @@
     }
 }
 
-@-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?") {
-/* 個々のポスト */
-	/* ポストの横幅がHOMEと同じになるように
-       HOMEで左に表示されるアイコンの部分の幅: 44+9px
-       元々のpadding: 17px */
-    article[data-testid="tweet"] > div > div > div > div:has(> div[data-testid="tweetText"]) {
-        padding-left: calc(44px + 9px);
-        margin-top: 2px;
-        
-        + div[id^="id__"] {
-            /* 引用ポスト */
-            padding-left: calc(44px + 9px);
-        }
+@-moz-document url("https://x.com/home") {
+/** HOME TL **/
+    /* おすすめ・フォロー中のタブの高さ */
+    div.ManageTimelines,
+    div[data-testid="ScrollSnap-List"] > div[role="presentation"] > div[role="tab"] {
+        height: 24px;
+    }
+    
+    div[data-testid="ScrollSnap-List"] > div[role="presentation"] > div[role="tab"] > div > div > div {
+        height: 28px;
+        opacity: 0.5;
+        top: 0.2rem;
+    }
+    /* CSLTボタンを隠す */
+    a.cslt_report_icon {
+        display: none;
+    }
+    
+    /* 縦の画像・動画の横幅を広げる */
+    div[style^="max-width"]:has(> div > div > div > a[role="link"] > div[style^="width:"] > div > div[data-testid="tweetPhoto"]),
+    div[style^="max-width"]:has(> div > div > div[data-testid="tweetPhoto"])
+    {
+        min-width: 50% !important;
+        max-height: 90vh;
+    }
+    a > div[style^="width:"]:has(> div > div[data-testid="tweetPhoto"]) {
+        min-width: 100% !important;
+        height: auto !important;
     }
 }
-@-moz-document url-prefix("https://x.com/i/bookmarks") {
-/** ブックマーク **/
-	/* メインカラムを広げる */
-	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-last-of-type(1) {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
-	    max-width: min(calc(100vw - 88px - 350px - 15px), 1000px);
+@-moz-document url-prefix("https://x.com/") {
+/** 全体共通 **/
+	/* 左のサイドバーを左に寄せる */
+	header[role="banner"] {
+	    flex-grow: 0;
 	}
-}
-
-@-moz-document url-prefix("https://x.com/i/communitynotes"),
-               url-prefix("https://x.com/i/birdwatch") {
-/** コミュニティノート **/
-	/* メインカラムを広げる */
-	div[data-testid="primaryColumn"] {
-	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
+	header[role="banner"] > div {
+	    margin-left: 0px;
 	}
 	
-	/* 右のサイドバーの幅 */
-	div[data-testid="sidebarColumn"],
-	div[data-testid="sidebarColumn"] > div:nth-of-type(1) > div:nth-of-type(2)
+	/* 左のサイドバーのアイコン群を真ん中寄せにする (テキストのdivを非表示にすることにより) */
+	header[role="banner"] nav[role="navigation"] > a > div > div:nth-of-type(2):has(> span),
+	header[role="banner"] button[role="button"] > div > div:nth-of-type(2):has(> span)
 	{
-	    width: 200px;
-	}
-}
-
-@-moz-document regexp("https://x\\.com/(?!home|notifications|i|search|hashtag)[A-Za-z0-9_]+(/with_replies|/medias)?") {
-/** 個人のページ **/
-	/* メインカラム */
-	div[data-testid="primaryColumn"],
-	div[data-testid="primaryColumn"] > div:nth-of-type(1) > div:nth-last-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
-	{
-	    max-width: min(calc(100vw - 88px - 200px - 15px), 1000px); 
-	}
-	
-	/* "「いま」を見つけよう" を少し小さくする */
-	div[data-testid="sidebarColumn"] h2[role="heading"] > div:nth-of-type(2) {
-	    font-size: 20px;
-	    line-height: 20px;
-	}
-	
-	/* 右のサイドバーを右に寄せる */
-	main[role="main"] > div {
-	    /* 左のサイドバー: 88px, 右のサイドバー: 350px, 右のサイドバーの右の余白: 15px */
-	    width: calc(100vw - 88px - 350px - 15px);
-	}
-
-	/* おすすめユーザーを非表示 */
-	div[data-testid="sidebarColumn"] div:has(> aside[role="complementary"]) {
 	    display: none;
 	}
-}
+	
+	/* 左のサイドバーをアイコンだけにする */
+	header[role='banner'] > div:nth-of-type(1),
+	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)
+	{
+	   width: 50px;
+	}
+	
+	/* 左のサイドバーの tweetボタンをアイコンにする */
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] {
+	    min-width: 0px;
+	    min-height: 0px;
+	    width: 29px;
+	    height: 29px;
+	    margin: 0;
+	    padding: 0;
+	    background-repeat: no-repeat;
+	    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='fill: white;' viewBox='0 0 26 26' aria-hidden='true' class='r-jwli3a r-4qtqp9 r-yyyyoo r-1472mwg r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp'%3E%3Cg%3E%3Cpath d='M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+	}
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] span,
+	a[href="/compose/post"][data-testid="SideNav_NewTweet_Button"] svg
+	{
+	    display: none; 
+	}
+	header[role='banner'] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-last-of-type(1) {
+	    margin: 0;
+	}
+    
+    /* 左のサイドバーの左右の空白を詰める */
+    header[role="banner"] {
+        div > h1 > a {
+            min-height: 29px;
+            min-width: 29px;
+            
+        }
+        nav[role="navigation"] > :is(a,button) > div {
+            margin-bottom: 15px;
+            padding: 0;
+        }
+    }
 
-@-moz-document regexp("https://x\\.com/(?!(home|i|search|hashtag|notifications|compose)/)[A-Za-z0-9_]+/status/\\d+(/quotes)?") {
-/** 個々のポスト **/
-    /* 「AIで生成」かつ「有料パートナーシップ」のポストを非表示 */
-    div[data-testid="cellInnerDiv"]:has(article[data-testid="tweet"] div > div > svg > g > path[d="M14 2c0 3.35.74 5.53 2.1 6.9 1.36 1.36 3.55 2.1 6.9 2.1v2c-3.35 0-5.54.74-6.9 2.1-1.36 1.37-2.1 3.55-2.1 6.9h-2c0-3.35-.74-5.53-2.11-6.9C8.53 13.74 6.35 13 3 13v-2c3.35 0 5.53-.74 6.89-2.1C11.26 7.53 12 5.35 12 2h2zM5 1c0 1.66-1.34 3-3 3v1c1.66 0 3 1.34 3 3h1c0-1.66 1.34-3 3-3V4C7.34 4 6 2.66 6 1H5z"]):has(div > a[href="https://help.x.com/rules-and-policies/paid-partnerships-policy"]) {
-        display: none;
+    /* 左下のアバターアイコン */
+    button[data-testid="SideNav_AccountSwitcher_Button"] {
+        padding: 13px 0;
+        
+        div[data-testid^="UserAvatar-Container-"] {
+            height: 28px!important;
+            width: 28px !important;
+        }
+        
+        > div:nth-of-type(2) {
+            display: none;
+        }
+        
+        > div {
+            margin-top: 15px;
+        }
     }
-}
-@-moz-document url("https://x.com/notifications/mentions") {
-/* 通知のメンション */
-    /* ヘッダーの謎画像 */
-    main section h1[id^="accessible-list-"] + div div > div[data-testid="cellInnerDiv"]:nth-of-type(1) {
-        display: none;
-    }
-}
 
-@-moz-document url("https://x.com/home") {
-    /* CSLTの報告ボタンがTLで表示されないように */
-    article[data-testid="tweet"] a.cslt_report_icon {
+    /* ポストの左側の空白 */
+    article[data-testid="tweet"] {
+        padding-left: 0px;
+    }
+    
+    /* ポストのアバターアイコンの右側 */
+    article[data-testid="tweet"] div:has(> div[data-testid="Tweet-User-Avatar"]) {
+        margin-right: 2px;
+    }
+    
+    /* サイドバーの利用規約とか */
+    div[data-testid="sidebarColumn"] div > nav[role="navigation"] {
+		display: none;
+    }
+    
+    div[data-testid="sidebarColumn"] div:has(div > form[role="search"]) {
+       	padding-bottom: 10px;
+    }
+	
+    /* サイドバーのDM, クリエータースタジオを隠す */
+    header[role="banner"] nav[role="navigation"] {
+        > a[href^="/i/chat"], > a[href^="/i/jf/creators/studio"] {
+            display: none;
+        }
+    }
+        
+	/* GROKのpopupボタンを消す */
+	div[data-testid="GrokDrawer"] {
+        	display: none;
+	}
+
+    /* 「パロディアカウント」のラベルを非表示 */
+    div:has(> div > div > div[data-testid="User-Name"]) + div:has(> div > a[href="https://help.x.com/rules-and-policies/authenticity"]),
+    /** 引用ポストの中 **/
+    div:has(> div > div[data-testid="Tweet-User-Avatar"]) > div:has(> a[href="https://help.x.com/rules-and-policies/authenticity"])
+	{
+		display: none;
+    }
+        
+    /* RTするときに「記事読む？」 を消す */
+	div[role="menu"] > div > div > div > a:nth-child(1) {
+	    display: none;
+	}
+
+    /* ポストのフォントサイズをページ毎に変えない */
+    article div[data-testid="tweetText"] span {
+        font-size: var(--tweet-font-size);
+        line-height: 160%;
+    }
+    /** 絵文字 **/
+    article div[data-testid="tweetText"] img[src^="https://abs-0.twimg.com/emoji/"] {
+        height: calc(var(--tweet-font-size)*1.2);
+        width: calc(var(--tweet-font-size)*1.2);
+    }
+
+    /* ポストの右上の … を大きくする */
+    article[data-testid="tweet"] button[data-testid="caret"][aria-haspopup="menu"] > div > div {
+        height: 40px;
+        top: -20px;
+        margin-bottom: -24px;
+            
+        > svg {
+    	    width: 40px;
+            height: auto;
+        }
+    }
+    
+    /* 画像にマウスオーバーすると出る「画像を編集
+    article[data-testid="tweet"] div[id^="id__"] > div > div > div:has(div[data-testid="tweetPhoto"] > img) > div > div:nth-of-type(2) {
         display: none;
     }
+    */
 }
